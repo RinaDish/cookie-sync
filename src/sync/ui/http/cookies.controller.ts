@@ -26,13 +26,21 @@ export class CookiesController {
     @Param('id') id: string,
     @Query() query: GetPartnerCallHttpRequestDto,
   ): Promise<GetPartnerCallHttpResponseDto> {
-    const res = await this.getPartnerCallHandler.handle(
-      query.toRequest(id, req),
-    );
-    return {
-      data: [{ uid: res }],
-      result: true, // ToDo
-    };
+    try {
+      const res = await this.getPartnerCallHandler.handle(
+        query.toRequest(id, req),
+      );
+
+      return {
+        data: [{ uid: res }],
+        result: true,
+      };
+    } catch (e) {
+      return {
+        data: [e],
+        result: false,
+      };
+    }
   }
 
   @ApiOperation({ summary: 'Get cookies for partner' })
@@ -45,10 +53,17 @@ export class CookiesController {
   async getCookies(
     @Param('id') id: string,
   ): Promise<GetCookiesHttpResponseDto> {
-    const res = await this.getCookiesHandler.handle(id);
-    return {
-      data: [res],
-      result: true, // ToDo
-    };
+    try {
+      const res = await this.getCookiesHandler.handle(id);
+      return {
+        data: [res],
+        result: true,
+      };
+    } catch (e) {
+      return {
+        data: [e],
+        result: false,
+      };
+    }
   }
 }

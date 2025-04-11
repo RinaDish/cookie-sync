@@ -18,9 +18,5 @@ export class CookiesRepository implements CookiesRepositoryInterface {
     if (!this.cookiesRepo[partnerId]) this.cookiesRepo[partnerId] = {};
     if (!this.cookiesRepo[partnerId][partnerUid])
       this.cookiesRepo[partnerId][partnerUid] = generatedCookie;
-    console.log(
-      '🚀 ~ CookiesRepository ~ this.cookiesRepo:',
-      JSON.stringify(this.cookiesRepo),
-    );
   }
 }

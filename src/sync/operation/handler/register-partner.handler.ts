@@ -17,13 +17,12 @@ export class RegisterPartnerHandler {
   }: RegisterPartnerRequest): Promise<string> {
     const partnerId = this.generateRandomString(6);
 
-    this.settingsRepository.save(
-      partnerId,
+    this.settingsRepository.save(partnerId, {
       partnerName,
       callingSide,
       storingSide,
       redirectLink,
-    );
+    });
     return partnerId;
   }
 

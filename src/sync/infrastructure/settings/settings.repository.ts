@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Side } from 'src/sync/domain/enum/side.enum';
 import { SettingsRepositoryInterface } from './interface/settings.repository';
 import { SettingsStorageType } from './interface/settings.storage';
+import { Partner } from 'src/sync/domain/types/partner';
 
 @Injectable()
 export class SettingsRepository implements SettingsRepositoryInterface {
@@ -11,16 +11,13 @@ export class SettingsRepository implements SettingsRepositoryInterface {
     return this.settingsRepo;
   }
 
-  find(partnerId: string): Promise<Record<string, string> | null> {
+  find(partnerId: string): Partner | null {
     return this.settingsRepo[partnerId];
   }
 
   save(
     partnerId: string,
-    partnerName: string,
-    callingSide: Side,
-    storingSide: Side,
-    redirectLink?: string,
+    { partnerName, callingSide, storingSide, redirectLink }: Partner,
   ) {
     if (!this.settingsRepo[partnerId])
       this.settingsRepo[partnerId] = {
