@@ -9,46 +9,46 @@ import { GetPartnerCallHttpResponseDto } from './response.dto/get-partner-call.h
 @ApiTags('Sync')
 @Controller('')
 export class CookiesController {
-    constructor(
-        private readonly getPartnerCallHandler: GetPartnerCallHandler,
-        private readonly getCookiesHandler: GetCookiesHandler,
-    ) { }
+  constructor(
+    private readonly getPartnerCallHandler: GetPartnerCallHandler,
+    private readonly getCookiesHandler: GetCookiesHandler,
+  ) {}
 
+  @ApiOperation({ summary: 'Get partner call' })
+  @ApiResponse({
+    status: 200,
+    description: 'Get partner call',
+    type: GetPartnerCallHttpResponseDto,
+  })
+  @Get(':id')
+  async getPartnerCall(
+    @Req() req: Request,
+    @Param('id') id: string,
+    @Query() query: GetPartnerCallHttpRequestDto,
+  ): Promise<GetPartnerCallHttpResponseDto> {
+    const res = await this.getPartnerCallHandler.handle(
+      query.toRequest(id, req),
+    );
+    return {
+      data: [{ uid: res }],
+      result: true, // ToDo
+    };
+  }
 
-    @ApiOperation({ summary: 'Get partner call' })
-    @ApiResponse({
-        status: 200,
-        description: 'Get partner call',
-        type: GetPartnerCallHttpResponseDto,
-    })
-    @Get(':id')
-    async getPartnerCall(
-        @Req() req: Request,
-        @Param('id') id: string,
-        @Query() query: GetPartnerCallHttpRequestDto,
-    ): Promise<GetPartnerCallHttpResponseDto> {
-        const res = await this.getPartnerCallHandler.handle(query.toRequest(id, req));
-        return {
-            data: [{ uid: res }],
-            result: true, // ToDo
-        };
-    }
-
-    @ApiOperation({ summary: 'Get cookies for partner' })
-    @ApiResponse({
-        status: 200,
-        description: 'Get partner call',
-        type: GetPartnerCallHttpResponseDto,
-    })
-    @Get('cookies/:id')
-    async getCookies(
-        @Param('id') id: string,
-    ): Promise<GetCookiesHttpResponseDto> {
-        const res = await this.getCookiesHandler.handle(id);
-        return {
-            data: [res],
-            result: true, // ToDo
-        };
-    }
+  @ApiOperation({ summary: 'Get cookies for partner' })
+  @ApiResponse({
+    status: 200,
+    description: 'Get partner call',
+    type: GetPartnerCallHttpResponseDto,
+  })
+  @Get('cookies/:id')
+  async getCookies(
+    @Param('id') id: string,
+  ): Promise<GetCookiesHttpResponseDto> {
+    const res = await this.getCookiesHandler.handle(id);
+    return {
+      data: [res],
+      result: true, // ToDo
+    };
+  }
 }
-

@@ -5,12 +5,14 @@ import { SyncModule } from './sync/sync.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [SyncModule, ConfigModule.forRoot({
-    isGlobal: true,
-    envFilePath: '.env',
-  }),],
+  imports: [
+    SyncModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
- 
+export class AppModule {}

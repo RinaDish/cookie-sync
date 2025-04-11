@@ -1,4 +1,4 @@
 export enum Side {
-    we = 'we',
-    partner = 'partner',
+  we = 'we',
+  partner = 'partner',
 }

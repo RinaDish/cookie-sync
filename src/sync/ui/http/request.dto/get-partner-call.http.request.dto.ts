@@ -1,7 +1,7 @@
 import { ApiExtraModels, ApiProperty } from '@nestjs/swagger';
 import { IsString, IsDefined } from 'class-validator';
 import { getClientIp, RequestWithSocket } from 'src/common/ip';
-import { GetPartnerCallRequest } from '../../../operation/request/get-partner-call.request'
+import { GetPartnerCallRequest } from '../../../operation/request/get-partner-call.request';
 
 @ApiExtraModels()
 export class GetPartnerCallHttpRequestDto {
@@ -18,11 +18,10 @@ export class GetPartnerCallHttpRequestDto {
 
   toRequest(id: string, req: Request): GetPartnerCallRequest {
     return {
-        uid: this.uid,
-        partnerId: id,
-        ip: getClientIp(req as RequestWithSocket),
-        userAgent: req.headers['user-agent'] ?? 'Unknown',
+      uid: this.uid,
+      partnerId: id,
+      ip: getClientIp(req as RequestWithSocket),
+      userAgent: req.headers['user-agent'] ?? 'Unknown',
     };
   }
 }
-

@@ -5,6 +5,6 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { DomainModule } from './domain/domain.module';
 
 @Module({
-  imports: [UiModule, OperationModule, InfrastructureModule, DomainModule]
+  imports: [UiModule, OperationModule, InfrastructureModule, DomainModule],
 })
 export class SyncModule {}

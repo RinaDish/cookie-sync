@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 class Cookie {
-    [key: string]: string;
-  }
+  [key: string]: string;
+}
 
 export class GetCookiesHttpResponseDto {
-    @ApiProperty({ type: Cookie })
-    data: Cookie[];
+  @ApiProperty({ type: Cookie })
+  data: Cookie[];
 
-    @ApiProperty({ example: true })
-    result: boolean;
+  @ApiProperty({ example: true })
+  result: boolean;
 }

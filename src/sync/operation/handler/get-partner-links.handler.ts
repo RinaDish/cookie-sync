@@ -6,28 +6,35 @@ import { SETTINGS_REPOSITORY_TOKEN } from 'src/sync/infrastructure/settings/inte
 import { SettingsStorageType } from 'src/sync/infrastructure/settings/interface/settings.storage';
 import { SettingsRepository } from 'src/sync/infrastructure/settings/settings.repository';
 
-
 @Injectable()
 export class GetPartnerLinksHandler {
-    constructor(
-        @Inject(SETTINGS_REPOSITORY_TOKEN)
-        private readonly settingsRepository: SettingsRepository,
-        private readonly configService: ConfigService,
-    ) { }
-    async handle({ ip, userAgent }): Promise<string[]> {
-        const partners = this.settingsRepository.getAll();
-        const hash = getUserHashWithSecret(ip, userAgent, this.configService.get<string>('COOKIE_SYNC_SECRET'));
-        return this.getLinks(partners, hash);
-    }
+  constructor(
+    @Inject(SETTINGS_REPOSITORY_TOKEN)
+    private readonly settingsRepository: SettingsRepository,
+    private readonly configService: ConfigService,
+  ) {}
+  async handle({ ip, userAgent }): Promise<string[]> {
+    const partners = this.settingsRepository.getAll();
+    const hash = getUserHashWithSecret(
+      ip,
+      userAgent,
+      this.configService.get<string>('COOKIE_SYNC_SECRET'),
+    );
+    return this.getLinks(partners, hash);
+  }
 
-    getLinks(partners: SettingsStorageType, uid: string): string[] {
-        const links = Object.keys(partners)
-            .filter(partnerId =>
-                partners[partnerId].callingSide === Side.we && partners[partnerId].redirectLink)
-            .map(partnerId => partners[partnerId].redirectLink.replace('%24%7BUID%7D', uid)) // ToDo add uid
-        return links;
-    }
-
+  getLinks(partners: SettingsStorageType, uid: string): string[] {
+    const links = Object.keys(partners)
+      .filter(
+        (partnerId) =>
+          partners[partnerId].callingSide === Side.we &&
+          partners[partnerId].redirectLink,
+      )
+      .map((partnerId) =>
+        partners[partnerId].redirectLink.replace('%24%7BUID%7D', uid),
+      ); // ToDo add uid
+    return links;
+  }
 }
 
 // {

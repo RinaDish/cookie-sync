@@ -5,31 +5,29 @@ import { SettingsStorageType } from './interface/settings.storage';
 
 @Injectable()
 export class SettingsRepository implements SettingsRepositoryInterface {
-    private readonly settingsRepo: SettingsStorageType = new Object();
+  private readonly settingsRepo: SettingsStorageType = new Object();
 
-    getAll(
-    ): SettingsStorageType {
-        return this.settingsRepo;
-    }
+  getAll(): SettingsStorageType {
+    return this.settingsRepo;
+  }
 
-    find(
-        partnerId: string,
-    ): Promise<Record<string, string> | null> {
-        return this.settingsRepo[partnerId];
-    }
+  find(partnerId: string): Promise<Record<string, string> | null> {
+    return this.settingsRepo[partnerId];
+  }
 
-    save(
-        partnerId: string,
-        partnerName: string,
-        callingSide: Side,
-        storingSide: Side,
-        redirectLink?: string
-    ) {
-        if (!this.settingsRepo[partnerId]) this.settingsRepo[partnerId] = {
-            partnerName,
-            callingSide,
-            storingSide,
-            redirectLink
-        };
-    }
+  save(
+    partnerId: string,
+    partnerName: string,
+    callingSide: Side,
+    storingSide: Side,
+    redirectLink?: string,
+  ) {
+    if (!this.settingsRepo[partnerId])
+      this.settingsRepo[partnerId] = {
+        partnerName,
+        callingSide,
+        storingSide,
+        redirectLink,
+      };
+  }
 }

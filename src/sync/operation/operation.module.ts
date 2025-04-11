@@ -7,15 +7,15 @@ import { GetPartnerLinksHandler } from './handler/get-partner-links.handler';
 import { RegisterPartnerHandler } from './handler/register-partner.handler';
 
 const handlers = [
-    GetPartnerCallHandler,
-    GetCookiesHandler,
-    RegisterPartnerHandler,
-    GetPartnerLinksHandler
+  GetPartnerCallHandler,
+  GetCookiesHandler,
+  RegisterPartnerHandler,
+  GetPartnerLinksHandler,
 ];
 
 @Module({
-    providers: [...handlers],
-    imports: [InfrastructureModule, DomainModule],
-    exports: [...handlers],
-  })
+  providers: [...handlers],
+  imports: [InfrastructureModule, DomainModule],
+  exports: [...handlers],
+})
 export class OperationModule {}

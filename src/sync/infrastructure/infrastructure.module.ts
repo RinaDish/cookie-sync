@@ -6,19 +6,24 @@ import { SETTINGS_REPOSITORY_TOKEN } from './settings/interface/settings.reposit
 import { SettingsRepository } from './settings/settings.repository';
 
 @Module({
-    providers: [
-        CookiesRepository,
-        SettingsRepository,
-        {
-            provide: COOKIES_REPOSITORY_TOKEN,
-            useClass: CookiesRepository,
-        },
-        {
-            provide: SETTINGS_REPOSITORY_TOKEN,
-            useClass: SettingsRepository,
-        }
-    ],
-    imports: [DomainModule],
-    exports: [CookiesRepository, SettingsRepository, SETTINGS_REPOSITORY_TOKEN, COOKIES_REPOSITORY_TOKEN],
+  providers: [
+    CookiesRepository,
+    SettingsRepository,
+    {
+      provide: COOKIES_REPOSITORY_TOKEN,
+      useClass: CookiesRepository,
+    },
+    {
+      provide: SETTINGS_REPOSITORY_TOKEN,
+      useClass: SettingsRepository,
+    },
+  ],
+  imports: [DomainModule],
+  exports: [
+    CookiesRepository,
+    SettingsRepository,
+    SETTINGS_REPOSITORY_TOKEN,
+    COOKIES_REPOSITORY_TOKEN,
+  ],
 })
-export class InfrastructureModule { }
+export class InfrastructureModule {}
