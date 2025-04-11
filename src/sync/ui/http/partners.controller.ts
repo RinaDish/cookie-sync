@@ -1,11 +1,9 @@
-import { Body, Controller, Get, Param, Post, Query, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { getClientIp, RequestWithSocket } from 'src/common/ip';
 import { GetPartnerLinksHandler } from 'src/sync/operation/handler/get-partner-links.handler';
 import { RegisterPartnerHandler } from 'src/sync/operation/handler/register-partner.handler';
-import { RegisterPartnerRequest } from 'src/sync/operation/request/register-partner.request';
 import { RegisterPartnerHttpRequestDto } from './request.dto/register-partner.http.request';
-import { GetPartnerCallHttpResponseDto } from './response.dto/get-partner-call.http.response.dto';
 import { GetPartnerLinksHttpResponseDto } from './response.dto/get-partner-links.response.dto';
 import { RegisterPartnerHttpResponseDto } from './response.dto/register-partner.http.response.dto';
 
