@@ -1,0 +1,209 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/": {
+            "get": {
+                "operationId": "AppController_getHello",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "App"
+                ]
+            }
+        },
+        "/{id}": {
+            "get": {
+                "operationId": "CookiesController_getPartnerCall",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "uid",
+                        "required": true,
+                        "in": "query",
+                        "description": "UID",
+                        "schema": {
+                            "example": "uid123",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get partner call",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPartnerCallHttpResponseDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Get partner call",
+                "tags": [
+                    "Sync"
+                ]
+            }
+        },
+        "/cookies/{id}": {
+            "get": {
+                "operationId": "CookiesController_getCookies",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get partner call",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPartnerCallHttpResponseDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Get cookies for partner",
+                "tags": [
+                    "Sync"
+                ]
+            }
+        },
+        "/partner": {
+            "post": {
+                "operationId": "PartnersController_getPartnerCall",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterPartnerHttpRequestDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Register partner",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RegisterPartnerHttpResponseDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Register partner",
+                "tags": [
+                    "Partner"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Cookie Sync API",
+        "description": "Документация API для cookie-синхронизации",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "sync",
+            "description": ""
+        }
+    ],
+    "servers": [],
+    "components": {
+        "schemas": {
+            "PartnerCallDataDto": {
+                "type": "object",
+                "properties": {
+                    "uid": {
+                        "type": "string",
+                        "example": "uid"
+                    }
+                },
+                "required": [
+                    "uid"
+                ]
+            },
+            "GetPartnerCallHttpResponseDto": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/PartnerCallDataDto"
+                    },
+                    "result": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "required": [
+                    "data",
+                    "result"
+                ]
+            },
+            "RegisterPartnerHttpRequestDto": {
+                "type": "object",
+                "properties": {
+                    "calling_side": {
+                        "type": "string",
+                        "description": "calling side",
+                        "example": "we"
+                    },
+                    "storing_side": {
+                        "type": "string",
+                        "description": "storing side",
+                        "example": "we"
+                    },
+                    "redirect_link": {
+                        "type": "string",
+                        "description": "redirect link uri encoded",
+                        "example": "https%3A%2F%2Fwww.google.com%2F%24%7BUID%7D"
+                    }
+                },
+                "required": [
+                    "calling_side",
+                    "storing_side",
+                    "redirect_link"
+                ]
+            },
+            "RegisterPartnerHttpResponseDto": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "string"
+                    },
+                    "result": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "required": [
+                    "data",
+                    "result"
+                ]
+            }
+        }
+    }
+}
